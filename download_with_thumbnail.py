@@ -1,3 +1,5 @@
+# %%
+
 from pytube import YouTube
 from mp3_add_thumbnail import add_thumbnail
 from convert_mp4_to_mp3 import convert_mp4_to_mp3
@@ -33,19 +35,16 @@ if __name__ == '__main__':
 	print('File downloaded')
 
 	download_thumbnail(yt_vid)
-	add_thumbnail(audio_filepath, "thumbnail.png")
+		
+	try:
+		add_thumbnail(audio_filepath, "thumbnail.png")
+		print("Thumbnail added")
+	except:
+		print("Thumbnail not added")
+
 	os.remove("thumbnail.png")
+	# %%
+	output_path = r"E:\Muzyka\Do przesłuchania"
+	shutil.move(audio_filepath, os.path.join(output_path, yt_vid.title + '.mp3'))
+	print('File moved')
 
-	# try:
-	# 	add_thumbnail(audio_filepath, "thumbnail.png")
-	# 	print("Thumbnail added")
-	# except:
-	# 	print("Thumbnail not added")
-
-	# output_path = r"E:\Muzyka\Do przesłuchania"
-	# shutil.move(new_file, output_path)
-	# print('File moved')
-
-
-
-	# input()
