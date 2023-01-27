@@ -9,6 +9,7 @@ import requests
 
 def download_thumbnail(yt_vid):
 	thumbnail_url = yt_vid.thumbnail_url
+	# if thumbanil res is small, change to max res
 	if "sddefault" in thumbnail_url:
 		thumbnail_url = thumbnail_url.replace("sddefault", "maxresdefault")
 		print("Thumbnail changed to maxresdefault")
@@ -19,8 +20,7 @@ def download_thumbnail(yt_vid):
 	file.write(response.content)
 	file.close()
 
-
-
+# %%
 if __name__ == '__main__':
 	yt_page = input("Insert Youtube URL: ")
 	yt_vid = YouTube(yt_page)
@@ -40,11 +40,12 @@ if __name__ == '__main__':
 		add_thumbnail(audio_filepath, "thumbnail.png")
 		print("Thumbnail added")
 	except:
-		print("Thumbnail not added")
+		print("ERROR \nThumbnail not added")
 
 	os.remove("thumbnail.png")
 	# %%
 	output_path = r"E:\Muzyka\Do przesłuchania"
 	shutil.move(audio_filepath, os.path.join(output_path, yt_vid.title + '.mp3'))
 	print('File moved')
-
+	input('Press Enter to escape...')
+	
