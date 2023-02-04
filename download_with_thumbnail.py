@@ -45,7 +45,15 @@ if __name__ == '__main__':
 	os.remove("thumbnail.png")
 	# %%
 	output_path = r"E:\Muzyka\Do przesłuchania"
-	shutil.move(audio_filepath, os.path.join(output_path, yt_vid.title + '.mp3'))
-	print('File moved')
+
+	# delete ' and " from title as it will cause error when moving files
+	mp3_title = yt_vid.title.replace('\"', '').replace('\'', '')
+	print(mp3_title)
+	
+	try:
+		shutil.move(audio_filepath, os.path.join(output_path, mp3_title + '.mp3'))
+		print('File moved')		
+	except Exception as exc:
+		print("Ooops, File not moved, here comes an exception: ", exc)
 	input('Press Enter to escape...')
 	
